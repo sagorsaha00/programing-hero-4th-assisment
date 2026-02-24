@@ -144,7 +144,7 @@ function renderDisplayData(data) {
     if (data.length === 0) {
         listContainer.innerHTML = `<div class="card bg-base-100 card-border flex bg-base-100 w-2/3 mx-auto mt-10 sm:w-3/4">
         <figure>
-            <img src="/jobs.png" alt="Shoes" />
+            <img src="jobs.png" alt="Shoes" />
         </figure>
         <div class="text-body items-center text-center card-body">
             <h1 class="text-[22px] font-bold text-[#0f2d52]">No Jobs Available</h1>
