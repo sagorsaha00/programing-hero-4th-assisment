@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <title>InterView Post</title>
+</head>
+
+<body>
+    <div class="card  card-border flex bg-base-100 w-1/2 mx-auto mt-10 sm:w-3/4">
+        <h1 class="card-title text-4xl font-bold text-[#0f2d52]  font-bold sm:text-xl">Job Application Tracker
+        </h1>
+        <div class="stats stats-vertical sm:stats-horizontal shadow w-full bg-base-100 rounded-lg p-2 gap-4">
+
+            <div class=" stat border border-base-200 rounded-xl">
+                <div class="stat-title text-slate-500 text-2xl font-bold  sm:font-medium">Total</div>
+                <div id="jobDatalenght" class="stat-value sm:font-medium text-[#0f2d52] sm: "></div>
+            </div>
+
+            <div class="stat border border-base-200 rounded-xl ">
+                <div class="stat-title text-slate-500 sm:font-medium text-2xl font-bold">Interview</div>
+                <div id="interviewDatalenght" class="stat-value sm:font-medium  text-[#10b981]">0</div>
+            </div>
+
+            <div class="stat border border-base-200 sm:font-medium rounded-xl">
+                <div class="stat-title text-slate-500   text-2xl font-bold">Rejected</div>
+                <div id="rejectedDatalenght" class="stat-value text-[#ef4444] sm:font-medium">0</div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-gray-500 h-1 opacity-10 my-10 w-3/4 mx-auto flex-col sm:flex-row gap-3 mt-4"></div>
+    <div class="flex gap-4 mx-auto justify-start w-1/2 sm:w-3/4">
+        <a id="default-btn" onclick="showTabByData(event, 'all')"
+            class="btn   header-btn w-[100px] h-[50px] header-btn-active   btn-xs sm:btn-sm">ALL</a>
+        <a onclick="showTabByData(event, 'interview')"
+            class="btn header-btn btn-xs w-[100px] h-[50px] sm:btn-sm">INTERVIEW</a>
+        <a onclick="showTabByData(event, 'rejected')"
+            class="btn header-btn w-[100px] h-[50px] btn-xs sm:btn-sm">REJECTED</a>
+
+        <p id="outOfData"
+            class="flex items-center justify-end ml-auto text-slate-500 sm:font-medium  text-2xl"> 
+        </p>
+    </div>
+    <ul id="job-list">
+    </ul>
+
+
+</body>
+<script src="index.js"></script>
+
+</html>
