@@ -1,4 +1,4 @@
-\*\* i am try to best to add all function, but interview or rejected status, instant not update if you go another tab its update
+
 
 1.ans
 **from a div (by id) get a single element by this getElementById method

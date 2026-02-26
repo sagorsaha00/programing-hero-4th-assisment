@@ -7,44 +7,47 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    
+
     <title>InterView Post</title>
 </head>
 
 <body>
-    <div class="card  card-border flex bg-base-100 w-1/2 mx-auto mt-10 sm:w-3/4">
-        <h1 class="card-title text-4xl font-bold text-[#0f2d52]  font-bold sm:text-xl">Job Application Tracker
-        </h1>
-        <div class="stats stats-vertical sm:stats-horizontal shadow w-full bg-base-100 rounded-lg p-2 gap-4">
+    <div class="w-full md:w-3/4 lg:w-3/4 mx-auto mt-8 px-4">
+        <div class="card card-border bg-base-100 shadow-sm rounded-lg p-4 md:p-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <h1 class="card-title text-2xl md:text-4xl font-bold text-[#0f2d52]">Job Application Tracker</h1>
+                <div class="w-full md:w-auto">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="stat border border-base-200 rounded-xl p-3 bg-white">
+                            <div class="stat-title text-slate-500 text-lg md:text-xl font-semibold">Total</div>
+                            <div id="jobDatalenght" class="stat-value text-2xl md:text-3xl text-[#0f2d52]"></div>
+                        </div>
 
-            <div class=" stat border border-base-200 rounded-xl">
-                <div class="stat-title text-slate-500 text-2xl font-bold  sm:font-medium">Total</div>
-                <div id="jobDatalenght" class="stat-value sm:font-medium text-[#0f2d52] sm: "></div>
-            </div>
+                        <div class="stat border border-base-200 rounded-xl p-3 bg-white">
+                            <div class="stat-title text-slate-500 text-lg md:text-xl font-semibold">Interview</div>
+                            <div id="interviewDatalenght" class="stat-value text-2xl md:text-3xl text-[#10b981]">0</div>
+                        </div>
 
-            <div class="stat border border-base-200 rounded-xl ">
-                <div class="stat-title text-slate-500 sm:font-medium text-2xl font-bold">Interview</div>
-                <div id="interviewDatalenght" class="stat-value sm:font-medium  text-[#10b981]">0</div>
-            </div>
-
-            <div class="stat border border-base-200 sm:font-medium rounded-xl">
-                <div class="stat-title text-slate-500   text-2xl font-bold">Rejected</div>
-                <div id="rejectedDatalenght" class="stat-value text-[#ef4444] sm:font-medium">0</div>
+                        <div class="stat border border-base-200 rounded-xl p-3 bg-white">
+                            <div class="stat-title text-slate-500 text-lg md:text-xl font-semibold">Rejected</div>
+                            <div id="rejectedDatalenght" class="stat-value text-2xl md:text-3xl text-[#ef4444]">0</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="bg-gray-500 h-1 opacity-10 my-10 w-3/4 mx-auto flex-col sm:flex-row gap-3 mt-4"></div>
-    <div class="flex gap-4 mx-auto justify-start w-1/2 sm:w-3/4">
-        <a id="default-btn" onclick="showTabByData(event, 'all')"
-            class="btn   header-btn w-[100px] h-[50px] header-btn-active   btn-xs sm:btn-sm">ALL</a>
-        <a onclick="showTabByData(event, 'interview')"
-            class="btn header-btn btn-xs w-[100px] h-[50px] sm:btn-sm">INTERVIEW</a>
-        <a onclick="showTabByData(event, 'rejected')"
-            class="btn header-btn w-[100px] h-[50px] btn-xs sm:btn-sm">REJECTED</a>
+    <div class="w-full md:w-3/4 lg:w-3/4 mx-auto my-6 sm:my-10 px-4 sm:px-6">
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+            <div class="flex flex-wrap gap-3 items-center">
+                <a id="default-btn" onclick="showTabByData(event, 'all')"
+                    class="btn header-btn px-4 py-2 header-btn-active">ALL</a>
+                <a onclick="showTabByData(event, 'interview')" class="btn header-btn px-4 py-2">INTERVIEW</a>
+                <a onclick="showTabByData(event, 'rejected')" class="btn header-btn px-4 py-2">REJECTED</a>
+            </div>
 
-        <p id="outOfData"
-            class="flex items-center justify-end ml-auto text-slate-500 sm:font-medium  text-2xl"> 
-        </p>
+            <p id="outOfData" class="ml-auto text-slate-500 text-lg sm:text-2xl"></p>
+        </div>
     </div>
     <ul id="job-list">
     </ul>

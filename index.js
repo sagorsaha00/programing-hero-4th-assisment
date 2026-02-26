@@ -118,24 +118,31 @@ const interviewBtn = document.getElementById("interviewbtn");
 const rejectedBtn = document.getElementById("rejectedbtn");
 const interviewDatalenght = document.getElementById("interviewDatalenght");
 const rejectedDatalenght = document.getElementById("rejectedDatalenght");
+
+
+
 const interviewButton = document.getElementById("arrayinterviewBtn");
 const rejectedButton = document.getElementById("arrayrejectedBtn");
 const outOflength = document.getElementById("outOfData");
-const jobstatus = document.getElementById("jobsStatus");
 
-const TotalData = [DEMOJOBDATA]
+
+
+
+
+
+let AllDataShowInFrontTab = 'all';
+const TotalData = [DEMOJOBDATA];
 const allInterviewData = [];
 const allRejectedData = [];
 
 
 
+
+
 window.onload = () => {
+    AllDataShowInFrontTab = 'all';
     renderDisplayData(TotalData[0]);
-    const data = TotalData[0].length - allInterviewData.length
-    jobDatalenght.innerText = data - allRejectedData.length;
-    interviewDatalenght.innerText = allInterviewData.length;
-    rejectedDatalenght.innerText = allRejectedData.length;
-    outOflength.innerText = ` ${data - allInterviewData.length} of ${data} Jobs`;
+    updateLengthData();
 }
 
 
@@ -182,16 +189,17 @@ function renderDisplayData(data) {
               <span>•</span>
               <span>${job.salary}</span>
           </div>
-
+       
           ${job.status ? `
-     <button id='jobsStatus' class="btn btn-sm text-white
+     <button   class="btn btn-sm text-white
      ${job.status === "Interviewing" ? "bg-green-500 hover:bg-green-600" : ""}
       ${job.status === "Rejected" ? "bg-red-500 hover:bg-red-600" : ""}
       rounded-[4px] mb-3 ml-[6px] border-none">
+    
   
-  ${job.status}
+  ${job.status}  
 
-</button>
+</button> 
 ` : ''}
 
           <p class="text-slate-600 mb-6 text-[18px] font-medium">
@@ -222,12 +230,7 @@ function renderDisplayData(data) {
 }
 
 
-function removeDataFromInterViewData(arr, jobId) {
-    const index = arr.findIndex(job => job.id === jobId);
-    if (index !== -1) {
-        arr.splice(index, 1);
-    }
-}
+
 function updateLengthData() {
     const total = TotalData[0].length;
     const interviewData = allInterviewData.length;
@@ -236,37 +239,39 @@ function updateLengthData() {
     jobDatalenght.innerText = jobs;
     interviewDatalenght.innerText = interviewData;
     rejectedDatalenght.innerText = rejectedData;
-
+    if (AllDataShowInFrontTab === 'all') {
+        outOflength.innerText = ` ${jobs} of ${total} Jobs`;
+    } else if (AllDataShowInFrontTab === 'interview') {
+        outOflength.innerText = ` ${interviewData} of ${total} Jobs`;
+    } else if (AllDataShowInFrontTab === 'rejected') {
+        outOflength.innerText = ` ${rejectedData} of ${total} Jobs`;
+    }
 }
 
 
-function GetIdbyButton(jobId, buttonName,) {
+function GetIdbyButton(jobId, buttonName) {
     const jobData = TotalData[0].find(job => job.id === jobId);
-    if (!jobData) {
-        return;
-    }
-    removeDataFromInterViewData(allInterviewData, jobId);
-    removeDataFromInterViewData(allRejectedData, jobId);
     if (buttonName === "interviewBtn") {
         jobData.status = "Interviewing";
         allInterviewData.push(jobData);
-        jobDatalenght.innerText = TotalData[0].length
-        outOflength.innerText = ` ${TotalData[0].length} of ${TotalData[0].length} Jobs`;
-    }
-    if (buttonName === "rejectedBtn") {
+
+    } else if (buttonName === "rejectedBtn") {
         jobData.status = "Rejected";
         allRejectedData.push(jobData);
     }
     updateLengthData();
-    renderDisplayData()
+    if (AllDataShowInFrontTab === 'all') {
+        renderDisplayData(TotalData[0]);
+    } else if (AllDataShowInFrontTab === 'interview') {
+        renderDisplayData(allInterviewData);
+    } else if (AllDataShowInFrontTab === 'rejected') {
+        renderDisplayData(allRejectedData);
+    }
 
 }
 
-
-
 function showTabByData(event, type) {
     const tabs = document.querySelectorAll('.header-btn');
-    GetIdbyButton()
     tabs.forEach(tab => {
         tab.classList.remove('header-btn-active');
         tab.style.backgroundColor = "";
@@ -277,38 +282,38 @@ function showTabByData(event, type) {
     headerbutton.style.backgroundColor = "#4ade80";
     headerbutton.style.color = "black";
 
-    let dataToShow = [];
-
+    AllDataShowInFrontTab = type;
+    let dataToShow;
     if (type === 'all') {
-        const total = TotalData[0].length;
-        const interview = allInterviewData.length;
-        const rejected = allRejectedData.length;
-        const jobs = total - interview - rejected;
-        outOflength.innerText = ` ${jobs} of ${total} jobs`
-        dataToShow = Array.isArray(TotalData[0]) ? TotalData[0] : TotalData;
+        dataToShow = TotalData[0];
     } else if (type === 'interview') {
-        outOflength.innerText = `${allInterviewData.length} of ${TotalData[0].length} jobs`
         dataToShow = allInterviewData;
-        jobDatalenght.innerText = TotalData[0].length - allInterviewData.length
     } else if (type === 'rejected') {
         dataToShow = allRejectedData;
-        jobDatalenght.innerText = TotalData[0].length - allRejectedData.length
-        outOflength.innerText = `${allRejectedData.length} of ${TotalData[0].length} jobs`
     }
+
+    updateLengthData();
     renderDisplayData(dataToShow);
 }
-
+function removeDataFromInterViewData(arr, jobId) {
+    const index = arr.findIndex(job => job.id === jobId);
+    arr.splice(index, 1);
+}
 function deleteJob(id) {
-    const job = TotalData[0].find(job => job.id === id);
-    if (job) {
-        const data = TotalData[0].filter(job => job.id !== id);
-        TotalData[0] = data;
-        jobDatalenght.innerText = TotalData[0].length
-        outOflength.innerText = ` ${TotalData[0].length} of ${TotalData[0].length} Jobs`;
-        renderDisplayData(data);
-
+    const JobDataFromList = TotalData[0].findIndex(jobData => jobData.id === id);
+    TotalData[0].splice(JobDataFromList, 1);
+    removeDataFromInterViewData(allInterviewData, id);
+    removeDataFromInterViewData(allRejectedData, id);
+    updateLengthData();
+    var renderData;
+    if (AllDataShowInFrontTab === 'interview') {
+        renderData = allInterviewData;
+    } else if (AllDataShowInFrontTab === 'rejected') {
+        renderData = allRejectedData;
+    } else {
+        renderData = TotalData[0];
     }
-
+    renderDisplayData(renderData);
 }
 function main() {
     const defaultBtn = document.getElementById("default-btn");
